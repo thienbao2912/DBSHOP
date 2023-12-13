@@ -17,7 +17,7 @@
                 <li>- Mã đơn hàng: <?=$bill['id'];?></li> 
                 <li>- Ngày đặt hàng: <?=$bill['ngaydathang'];?></li> 
                 <li>- Tổng đơn hàng: <?=$bill['total'];?></li> 
-                <li>- Phương thức thanh toán: <?=$bill['bill_pttt'];?> <br>0:Trả tiền khi nhận hàng 1:Chuyển khoản ngân hàng 2:Thanh toán online</li>
+                <li>- Phương thức thanh toán: <?=$bill['bill_pttt'];?> <br>1:Trả tiền khi nhận hàng 2:Chuyển khoản ngân hàng 3:Thanh toán online</li>
             </div>
         </div>
      

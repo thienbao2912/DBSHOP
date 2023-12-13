@@ -1,59 +1,60 @@
 <?php
-require '../../global.php';
-require '../../dao/khach-hang.php';
 
-extract($_REQUEST);
-$VIEW_NAME = 'tai-khoan/quen-mk-email.php';
-$thongbao = "";
+// Kết nối database
+// $pdo = new PDO("mysql:host=localhost;dbname=duan1;charset=utf8");
 
-if (exist_param('btn_forgot_Email')) {
-    $user = khach_hang_select_by_email($email);
-    if ($user) {
-        if ($user['email'] != $email) {
-            $thongbao = "Nhập Sai Email Xin Vui Lòng Nhập Lại!";
+// Khởi tạo biến
+$email = "";
+$error = "";
+
+// Xử lý form
+if (isset($_POST["email"])) {
+    $email = $_POST["email"];
+
+    // Kiểm tra email hợp lệ
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = "Email không hợp lệ.";
+    } else {
+        // Lấy thông tin người dùng từ database
+        $dburl = "SELECT * FROM khachhang WHERE email = :email";
+        $statement = $pdo->prepare($dburl);
+        $statement->bindParam(":email", $email);
+        $statement->execute();
+
+        $khachhang = $statement->fetch();
+
+        // Nếu người dùng không tồn tại
+        if ($khachhang === false) {
+            $error = "Email không tồn tại.";
         } else {
-            $_SESSION['email'] = $email;
-            $VIEW_NAME = 'tai-khoan/quen-mk-Mailler.php';
+            // Gửi email cho người dùng
+            $subject = "Lấy lại mật khẩu";
+            $body = "Mật khẩu mới của bạn là: " . generate_password();
+            mail($khachhang["email"], $subject, $body);
 
-        }
-    } else {
-        $thongbao = 'Sai Email Vui Lòng Nhập Lại';
-    }
-}
-
-
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["btn_forgot_xac-nhan"])) {
-    $user = khach_hang_select_by_id($ma_kh);
-    if (isset($_POST["token"]) && $_POST["token"] === $_SESSION["token"]) {
-        $VIEW_NAME = 'tai-khoan/quen-mk-form.php';
-    } else {
-        echo "Sai Token";
-    }
-}
-
-
-if (exist_param('btn_forgot_pass')) {
-    $email = $_POST['email'];
-    $mat_khau1 = $_POST['mat_khau1'];
-    $mat_khau2 = $_POST['mat_khau2'];
-    if ($mat_khau1 != $mat_khau2) {
-        $thongbao = "Xác nhận mật khẩu mới không đúng";
-    } else {
-        $user = khach_hang_select_by_email($email);
-        if ($user) {
-            try {
-                $thongbao = "Cập Nhật Mật Khẩu Thành Công!";
-                khach_hang_change_Email($email, $mat_khau1);
-                $VIEW_NAME = 'tai-khoan/cap-nhat-thanh-cong.php';
-            } catch (Exception $exc) {
-                $thongbao = 'Thất bại';
-            }
-        } else {
-            $thongbao = "Sai mã đăng nhập";
+            // Chuyển hướng đến trang xác nhận
+            header("Location: forgot-password-confirm.php");
         }
     }
 }
 
+// Hiển thị form
+?>
 
-require '../layout.php';
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Quên mật khẩu</title>
+</head>
+<body>
+    <form action="" method="post">
+        <input type="email" name="email" placeholder="Email">
+        <input type="submit" value="Gửi">
+    </form>
 
+    <?php if ($error) { ?>
+        <p class="error"><?php echo $error; ?></p>
+    <?php } ?>
+</body>
+</html>

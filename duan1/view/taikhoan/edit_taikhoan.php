@@ -9,6 +9,7 @@
                     extract($_SESSION['ten']);
                 }
                 ?>
+                
                 <form action="index.php?act=edit_taikhoan" method="post">
                     <div class=" mb10">
                         Tên đăng nhập

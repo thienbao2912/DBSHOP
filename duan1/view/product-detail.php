@@ -31,7 +31,7 @@
         <?php
         $img = $img_path .$hinhanh;
         $formatNum = number_format($giaban);
-
+        $giamgia = number_format($giamgia);
         echo'
          <div class="col-lg-6">
                           <div id="" class="">
@@ -53,7 +53,7 @@
                     <div class="col-lg-6">
                                 <div class="portfolio-info">
                                     <h2>' . $ten . '</h2>
-                                    <h3>'. $formatNum .' đ</h3>
+                                    <h3><del>'. $formatNum .' đ</del>   '. $giamgia .' đ</h3>
                                   <h3>Thông tin sản phẩm</h3>
                                   <ul>
                                     <li>'. $mota .'</li>

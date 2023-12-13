@@ -57,7 +57,7 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             if (isset($_POST['dangky']) && ($_POST['dangky'])) {
                 $ten = $_POST['ten'];
                 $email = $_POST['email'];
-                $pass = $_POST['pass'];
+                $pass = md5($_POST['pass']);
                 insert_taikhoan( $ten,$email, $pass);
                 $thongbao = "Bạn đã đăng ký thành công.";
             }
@@ -66,7 +66,7 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
         case 'dangnhap':
             if (isset($_POST['dangnhap']) && ($_POST['dangnhap'])) {
                 $ten = $_POST['ten'];
-                $pass = $_POST['pass'];
+                $pass = md5($_POST['pass']);
                 $checkuser = checkuser($ten, $pass);
                 if (is_array($checkuser)) {
                     $_SESSION['ten'] = $checkuser;
@@ -82,7 +82,7 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
         case 'edit_taikhoan':
             if (isset($_POST['capnhat']) && ($_POST['capnhat'])) {
                 $ten = $_POST['ten'];
-                $pass = $_POST['pass'];
+                $pass = md5($_POST['pass']);
                 $email = $_POST['email'];
                 $sodienthoai = $_POST['sodienthoai'];
                 $address = $_POST['diachi'];
@@ -95,7 +95,7 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
             }
             include "view/taikhoan/edit_taikhoan.php";
             break;
-        case 'quenmk':
+        case 'quen-mk':
             if (isset($_POST['guiemail']) && ($_POST['guiemail'])) {
                 $email = $_POST['email'];
 
@@ -107,7 +107,7 @@ if ((isset($_GET['act'])) && ($_GET['act'] != "")) {
                 }
             }
            
-            include "view/taikhoan/quenmk.php";
+            include "view/taikhoan/quen-mk.php";
             break;
             case 'addtocart':
                 //add thông tin từ cái form add to cart đến session

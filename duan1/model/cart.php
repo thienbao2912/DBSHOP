@@ -79,15 +79,18 @@
             }else{
                 $xoasp_td = '';
             }                    
-           
+            $cart[3] = number_format($cart[3]);
+            $ttien = number_format($ttien);
+
+
            echo '
           
                 <tr class="mt-3">
                     <td><img src="'.$hinh.'" height="80px"></td>
                     <td>'.$cart[1].'</td>
-                    <td>'.$cart[3].'</td>
+                    <td>'.$cart[3].' đ</td>
                     <td>'.$cart[4].'</td>
-                    <td>'.$ttien.'</td>
+                    <td>'.$ttien.' đ</td>
                     '.$xoasp_td.'
                 </tr>';
             $i += 1;

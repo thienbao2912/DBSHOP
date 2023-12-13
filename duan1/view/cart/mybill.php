@@ -2,8 +2,8 @@
 <div class="container mb">
     <div class="boxtrai mr">
         <div class="row mb">
-            <h3 class="text-center mt-2">ĐƠN HÀNG CỦA BẠN</h3>
-            <div class="row mt-2 boxcontent cart">
+            <h3 class="text-center mt-3">ĐƠN HÀNG CỦA BẠN</h3>
+            <div class="row mt-3 boxcontent cart">
                 <table>
                     <tr class="bg-body-secondary">
                         <th>MÃ ĐƠN HÀNG</th>
@@ -19,12 +19,14 @@
                                 extract($bill);
                                 $ttdh = get_ttdh($bill['bill_status']);
                                 $countsp = loadall_cart_count($bill['id']);
+                                $bill['total'] = number_format($bill['total']);
+
                                 echo '  
                                     <tr>
                                         <td>'.$bill['id'].'</td>
                                         <td>'.$bill['ngaydathang'].'</td>
                                         <td>'.$countsp.'</td>
-                                        <td>'.$bill['total'].'</td>
+                                        <td>'.$bill['total'].' đ</td>
                                         <td>'.$ttdh.'</td>
                                     </tr>
                                 ';
@@ -42,4 +44,13 @@
 
 
 
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 

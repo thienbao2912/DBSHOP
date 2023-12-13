@@ -169,6 +169,8 @@
             foreach($spnew as $sp) {
               extract($sp);
               $formatNum = number_format($giaban);
+              $giamgia = number_format($giamgia);
+
               $linksp = "index.php?act=sanphamct&idsp=".$id;
               $hinhanh = $img_path.$hinhanh;
               if(($i == 2) || ($i == 5) || ($i == 8)) {
@@ -185,8 +187,9 @@
                                 <div class="mt-4 img"><a href="'.$linksp.'">
                                 <img class="img-product" src="'.$hinhanh.'" alt=""></a>
                                 </div>
-                                <a class="mt-2" href="'.$linksp.'">'.$ten.'</a>
-                                <p>'.$formatNum.'đ</p>
+                                <h6><a class="mt-2" href="'.$linksp.'">'.$ten.'</a></h6>
+                                <p><del>'.$formatNum.'đ</del></p>
+                                <p>'.$giamgia.'đ</p>
                                 <div class="">
                                 <form action="index.php?act=addtocart" method="post">
                                     <input type ="hidden" name="id" value="'.$id.'">

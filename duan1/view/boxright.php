@@ -14,14 +14,14 @@
                                     <a href="index.php?act=mybill">Đơn hàng của tôi</a>
                                 </li>
                                 <li>
-                                    <a href="index.php?act=quenmk">Quên mật khẩu</a>
+                                    <a href="index.php?act=quen-mk">Quên mật khẩu</a>
                                 </li>
                                 <li>
                                     <a href="index.php?act=edit_taikhoan">Cập nhật tài khoản</a>
                                 </li>
                                 <?php if($role==1){ ?>
                                 <li>
-                                    <a href="../admin/index.php">Đăng nhập admin</a>
+                                    <a href="../duan1/admin/index.php">Đăng nhập admin</a>
                                 </li>
                                 <?php }?>
                                 <li>
@@ -51,7 +51,7 @@
                             <input class="btn btn-secondary" type="submit" value="Đăng nhập" name="dangnhap"></div>
                         </form>
                         <li>
-                            <a href="#">Quên mật khẩu</a>
+                            <a href="quen-mk-form">Quên mật khẩu</a>
                         </li>
                         <li>
                             <a href="index.php?act=dangky">Đăng ký thành viên</a>
